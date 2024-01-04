@@ -12,24 +12,6 @@ provider "azurerm" {
   features {}
 }
 
-variable "subnets" {
-  type = map(object({
-    name = string
-    address_prefix = string
-    security_group = string
-  }))
-  default = {
-    "subnet1" = {
-      name = "devops-subnet-01"
-      address_prefix = "10.1.1.0/24"    
-    }
-    "subnet-02" = {
-      name =  "devops-subnet-02"
-      address_prefix = "10.1.2.0/24"
-    }
-  }
-}
-
 resource "azurerm_resource_group" "devops-rg" {
     name = "devops-RG"
     location = "eastus2"
@@ -83,17 +65,14 @@ resource "azurerm_virtual_network" "devops-network" {
     name = "devops-vnetwork"
     resource_group_name = azurerm_resource_group.devops-rg.name
     location = azurerm_resource_group.devops-rg.location
-    address_space = ["10.1.0.0/16"]
+    address_space = ["10.0.0.0/16"]
   
 }
 resource "azurerm_subnet" "devops-subnet" {
-  for_each = var.subnets
-
-  name = each.value.name
+  name = "devops-internal"
   virtual_network_name = azurerm_virtual_network.devops-network.name
   resource_group_name = azurerm_resource_group.devops-rg.name
-  address_prefixes = [each.value.address_prefix]
-  
+  address_prefixes = ["10.0.1.0/24"]
 }
 
 

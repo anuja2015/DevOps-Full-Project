@@ -1,5 +1,6 @@
 resource "azurerm_public_ip" "devops-PubIP" {
-  name                = "devops-IP"
+  for_each = var.devopsVMs
+  name                = "${each.value.name}-IP"
   location            = azurerm_resource_group.devops-rg.location
   resource_group_name = azurerm_resource_group.devops-rg.name
   allocation_method   = "Static"
@@ -7,9 +8,9 @@ resource "azurerm_public_ip" "devops-PubIP" {
     azurerm_resource_group.devops-rg,
    ]
 }
-
 resource "azurerm_network_interface" "devopsnic" {
-    name ="devops-nic"
+    for_each = var.devopsVMs
+    name = "${each.value.name}-nic"
     location            = azurerm_resource_group.devops-rg.location
     resource_group_name = azurerm_resource_group.devops-rg.name
 
@@ -17,7 +18,7 @@ resource "azurerm_network_interface" "devopsnic" {
     name                          = "devops-config-ip"
     subnet_id                     = azurerm_subnet.devops-subnet["subnet1"].id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = azurerm_public_ip.devops-PubIP.id
+    public_ip_address_id = azurerm_public_ip.devops-PubIP[each.key].id
   }
   depends_on = [ 
     azurerm_resource_group.devops-rg,
@@ -49,7 +50,7 @@ resource "azurerm_subnet" "devops-subnet" {
 }
 
 resource "azurerm_network_security_group" "devops-nsg" {
-  name                = "devops-nsg1"
+  name                = "devops-nsg"
   location            = azurerm_resource_group.devops-rg.location
   resource_group_name = azurerm_resource_group.devops-rg.name
 

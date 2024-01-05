@@ -19,10 +19,11 @@ resource "azurerm_resource_group" "devops-rg" {
 }
 
 resource "azurerm_linux_virtual_machine" "devopsvm" {
-    name = "devopsVM"
+    for_each = var.devopsVMs
+    name = each.value.name
     resource_group_name = azurerm_resource_group.devops-rg.name
     location = azurerm_resource_group.devops-rg.location
-    size = "Standard_B2s"
+    size = "Standard_B1s"
     source_image_reference {
       publisher = "Canonical"
       offer     = "0001-com-ubuntu-server-jammy"
@@ -39,7 +40,7 @@ resource "azurerm_linux_virtual_machine" "devopsvm" {
       storage_account_type = "Premium_LRS"
       caching = "ReadWrite"
     }
-    network_interface_ids = [ azurerm_network_interface.devopsnic.id, ]
+    network_interface_ids = [ azurerm_network_interface.devopsnic[each.key].id, ]
 
     depends_on = [  
       azurerm_resource_group.devops-rg, 

@@ -18,3 +18,21 @@ variable "subnets" {
     }
   }
 }
+variable "devopsVMs" {
+  type = map(object({
+    name = string
+
+  }))
+  default = {
+    "devopsVM1" = {
+      name = "jenkins-master"
+    }
+    "devopsVM2" = {
+      name = "build-node"
+    }
+    "devopsVM3" = {
+      name = "Ansible-server"
+    }
+  }
+  
+}

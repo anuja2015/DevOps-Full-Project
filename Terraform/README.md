@@ -1,4 +1,5 @@
 
+
 # Terraform
 
 Here we will be using terraform to create resources in Azure Cloud.
@@ -44,7 +45,29 @@ Here we will be using terraform to create resources in Azure Cloud.
 
 ### Terraform to create Virtual Network and a VM in that network.
 
+Steps
+
+1. Create resource group
+2. create virtual machine
+
+3. Create virtual network
+4. Create subnets using for_each
+
+    i) Create a variable of map(object) 
+
+    ii) Define the variable
+
+    iii) for_each = var.subnets
+    
+        each.value.xxxxx
+5. Create Public IP
+6. Create NSG
+7. Create NIC
+8. Create NSG-subnet association
+      
+         for_each = azurerm_subnet.devops-subnet
+         subnet_id = each.value.id 
 
 
-
+### Terraform to create multiple VMs
 

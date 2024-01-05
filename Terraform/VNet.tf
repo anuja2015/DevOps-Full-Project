@@ -1,52 +1,11 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source = "hashicorp/azurerm"
-      version = "3.85.0"
-    }
-  }
-}
-
-provider "azurerm" {
-  skip_provider_registration = "true"
-  features {}
-}
-
-resource "azurerm_resource_group" "devops-rg" {
-    name = "devops-RG"
-    location = "eastus2"
-  
-}
-
-resource "azurerm_linux_virtual_machine" "devopsvm" {
-    name = "devopsVM"
-    resource_group_name = azurerm_resource_group.devops-rg.name
-    location = azurerm_resource_group.devops-rg.location
-    size = "Standard_B2s"
-    source_image_reference {
-      publisher = "Canonical"
-      offer     = "0001-com-ubuntu-server-jammy"
-      sku       = "22_04-lts-gen2"
-      version   = "22.04.202311010"
-    }
-    admin_username = "azureuser"
-    admin_ssh_key {
-        username = "azureuser"
-        public_key = file("~/.ssh/id_rsa.pub")
-      
-    }
-    os_disk {
-      storage_account_type = "Premium_LRS"
-      caching = "ReadWrite"
-    }
-    network_interface_ids = [ azurerm_network_interface.devopsnic.id, ]
-  
-}
 resource "azurerm_public_ip" "devops-PubIP" {
   name                = "devops-IP"
   location            = azurerm_resource_group.devops-rg.location
   resource_group_name = azurerm_resource_group.devops-rg.name
   allocation_method   = "Static"
+  depends_on = [ 
+    azurerm_resource_group.devops-rg,
+   ]
 }
 
 resource "azurerm_network_interface" "devopsnic" {
@@ -56,25 +15,38 @@ resource "azurerm_network_interface" "devopsnic" {
 
   ip_configuration {
     name                          = "devops-config-ip"
-    subnet_id                     = azurerm_subnet.devops-subnet.id
+    subnet_id                     = azurerm_subnet.devops-subnet["subnet1"].id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.devops-PubIP.id
   }
+  depends_on = [ 
+    azurerm_resource_group.devops-rg,
+    azurerm_virtual_network.devops-network,
+    azurerm_subnet.devops-subnet,
+    ]
 }
 resource "azurerm_virtual_network" "devops-network" {
     name = "devops-vnetwork"
     resource_group_name = azurerm_resource_group.devops-rg.name
     location = azurerm_resource_group.devops-rg.location
-    address_space = ["10.0.0.0/16"]
+    address_space = ["10.1.0.0/16"]
+    depends_on = [ 
+      azurerm_resource_group.devops-rg,
+     ]
   
 }
 resource "azurerm_subnet" "devops-subnet" {
-  name = "devops-internal"
+  for_each = var.subnets
+
+  name = each.value.name
   virtual_network_name = azurerm_virtual_network.devops-network.name
   resource_group_name = azurerm_resource_group.devops-rg.name
-  address_prefixes = ["10.0.1.0/24"]
+  address_prefixes = [each.value.address_prefix]
+  depends_on = [ 
+    azurerm_virtual_network.devops-network,
+    ]
+  
 }
-
 
 resource "azurerm_network_security_group" "devops-nsg" {
   name                = "devops-nsg1"
@@ -115,9 +87,18 @@ resource "azurerm_network_security_group" "devops-nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
+  depends_on = [ 
+    azurerm_resource_group.devops-rg
+   ]
 }
-resource "azurerm_subnet_network_security_group_association" "subnet-associate-nsg" {
-  subnet_id                 = azurerm_subnet.devops-subnet.id
-  network_security_group_id = azurerm_network_security_group.devops-nsg.id
+
+resource "azurerm_subnet_network_security_group_association" "subnet-associate-nsg"{
+    for_each = azurerm_subnet.devops-subnet
+
+    subnet_id = each.value.id
+    network_security_group_id = azurerm_network_security_group.devops-nsg.id
+    depends_on = [ 
+      azurerm_virtual_network.devops-network,
+      azurerm_network_security_group.devops-nsg 
+      ]
 }

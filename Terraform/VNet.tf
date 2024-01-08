@@ -77,10 +77,10 @@ resource "azurerm_network_security_group" "devops-nsg" {
     destination_address_prefix = "*"
   }
   
-  security_rule {
-    name                       = "Apache_access"
-    priority                   = 103
-    direction                  = "Outbound"
+    security_rule {
+    name                       = "http_inbound_access"
+    priority                   = 3000
+    direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"

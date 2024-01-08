@@ -28,7 +28,7 @@ variable "devopsVMs" {
       name = "jenkins-master"
     }
     "devopsVM2" = {
-      name = "build-node"
+      name = "jenkins-node"
     }
     "devopsVM3" = {
       name = "Ansible-server"

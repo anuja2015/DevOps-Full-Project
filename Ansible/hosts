@@ -1,0 +1,11 @@
+[jenkins-master]
+172.203.8.76
+
+[jenkins-master:vars]
+ansible_user=azureuser
+
+[jenkins-node]
+20.110.183.229
+
+[jenkins-node:vars]
+ansible_user=azureuser

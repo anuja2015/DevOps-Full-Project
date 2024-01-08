@@ -1,5 +1,6 @@
 
 
+
 # Terraform
 
 Here we will be using terraform to create resources in Azure Cloud.
@@ -44,6 +45,7 @@ Here we will be using terraform to create resources in Azure Cloud.
 
 
 ### Terraform to create Virtual Network and a VM in that network.
+Note: Assign Contributor rule to the account user.
 
 Steps
 
@@ -70,4 +72,34 @@ Steps
 
 
 ### Terraform to create multiple VMs
+
+1. Define a variable for VM
+
+        variable "devopsVMs" {
+          type = map(object({
+            name = string
+
+        }))
+        default = {
+          "devopsVM1" = {
+              name = "jenkins-master"
+           }
+           "devopsVM2" = {
+              name = "build-node"
+            }
+           "devopsVM3" = {
+              name = "Ansible-server"
+            }
+        }
+2. Create IP for each vm using for_each
+3. Create NIC for each vm using for_each
+4. Attch IP to NIC
+5. Associate subnet1(devops-subnet-01) to all three VMs.
+
+
+### Additional Step
+
+Azure Portal -> MIcrosoft Intra ID -> App Registrationa -> register an app
+Azure portal -> Subscription -> Select the subscription -> Access Control(IAM) -> Add role assignment -> Contributor role to app.
+
 

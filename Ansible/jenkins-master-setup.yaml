@@ -1,6 +1,6 @@
 ---
 - name: Jenkins set up
-  hosts: jenkins-master
+  hosts: jenkinsmaster
   become : true
   tasks:
     - name: Update 

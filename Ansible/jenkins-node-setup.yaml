@@ -1,6 +1,6 @@
 ---
 - name: Maven setup on Jenkins slave
-  hosts: jenkins-node
+  hosts: jenkinsslave
   become: true
   tasks:
     - name: Update ubuntu repo and cache

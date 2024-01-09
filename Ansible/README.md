@@ -1,4 +1,5 @@
 
+
 # Ansible to configure Jenkins and Maven
 
 ## Set up Ansible server
@@ -84,6 +85,27 @@ Manual Jenkins installation steps
 5. Install jenkins
 
         sudo apt-get install jenkins
+
+#### These steps are written in ansible yaml and executed.
+
+## Set up Maven using Ansible.
+
+Steps:
+
+1. Update cache
+2. Install Java
+3. Download Maven packages
+4. Untar maven package.
+
+#### These steps are done using ansible yaml files on ansible server.
+
+    root@jenkins-node:/opt# /opt/apache-maven-3.9.6/bin/mvn --version
+    Apache Maven 3.9.6 (bc0240f3c744dd6b6ec2920b3cd08dcc295161ae)
+    Maven home: /opt/apache-maven-3.9.6
+    Java version: 11.0.21, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd64
+    Default locale: en, platform encoding: UTF-8
+    OS name: "linux", version: "6.2.0-1016-azure", arch: "amd64", family: "unix"
+
 
 
 

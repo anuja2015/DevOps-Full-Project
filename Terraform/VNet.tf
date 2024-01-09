@@ -8,6 +8,15 @@ resource "azurerm_public_ip" "devops-PubIP" {
     azurerm_resource_group.devops-rg,
    ]
 }
+resource "azurerm_public_ip" "jenkins-master-IP" {
+  name                = "jenkins-master-IP"
+  location            = azurerm_resource_group.devops-rg.location
+  resource_group_name = azurerm_resource_group.devops-rg.name
+  allocation_method   = "Static"
+  depends_on = [ 
+    azurerm_resource_group.devops-rg,
+   ]
+}
 resource "azurerm_network_interface" "devopsnic" {
     for_each = var.devopsVMs
     name = "${each.value.name}-nic"
@@ -19,6 +28,24 @@ resource "azurerm_network_interface" "devopsnic" {
     subnet_id                     = azurerm_subnet.devops-subnet["subnet1"].id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id = azurerm_public_ip.devops-PubIP[each.key].id
+  }
+  depends_on = [ 
+    azurerm_resource_group.devops-rg,
+    azurerm_virtual_network.devops-network,
+    azurerm_subnet.devops-subnet,
+    ]
+}
+
+resource "azurerm_network_interface" "jenkins-master-nic" {
+    name = "jenkins-master-nic"
+    location            = azurerm_resource_group.devops-rg.location
+    resource_group_name = azurerm_resource_group.devops-rg.name
+
+  ip_configuration {
+    name                          = "devops-config-ip"
+    subnet_id                     = azurerm_subnet.devops-subnet["subnet1"].id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.jenkins-master-IP.id
   }
   depends_on = [ 
     azurerm_resource_group.devops-rg,

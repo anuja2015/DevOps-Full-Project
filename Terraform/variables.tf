@@ -25,12 +25,9 @@ variable "devopsVMs" {
   }))
   default = {
     "devopsVM1" = {
-      name = "jenkins-master"
-    }
-    "devopsVM2" = {
       name = "jenkins-node"
     }
-    "devopsVM3" = {
+    "devopsVM2" = {
       name = "Ansible-server"
     }
   }

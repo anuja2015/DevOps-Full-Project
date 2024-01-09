@@ -1,0 +1,25 @@
+---
+- name: Maven setup on Jenkins slave
+  hosts: jenkins-node
+  become: true
+  tasks:
+    - name: Update ubuntu repo and cache
+      apt: 
+        update_cache: yes
+        force_apt_get: true 
+        cache_valid_time: 3600
+    - name: Install Java
+      apt:
+        pkg:
+          - openjdk-11-jdk
+          - openjdk-11-jre
+        state: present
+    - name: Download maven packages
+      get_url:
+        url: https://dlcdn.apache.org/maven/maven-3/3.9.6/binaries/apache-maven-3.9.6-bin.tar.gz
+        dest: /opt
+    - name: Extract maven package
+      unarchive:
+        src: /opt/apache-maven-3.9.6-bin.tar.gz
+        dest: /opt
+        remote_src: yes

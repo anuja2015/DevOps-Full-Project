@@ -3,3 +3,4 @@ Terraform/.terraform.lock.hcl
 Terraform/terraform.tfstate
 Terraform/terraform.tfstate.backup
 credentials.txt
+Jenkins/jenkins_credentials

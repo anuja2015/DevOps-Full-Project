@@ -40,12 +40,12 @@ Private key of the jenkins-master machine is added.
 <img width="815" alt="Add_node_3" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/84ed6050-2a21-4330-88e2-f3e2f85d0beb">
 <img width="823" alt="Add_node_4" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/d839b655-9578-4e3f-b0f7-5d8d611d773a">
 
-
-
-
-
-
 We can test the connection by creating a freestyle job.
+
+<img width="639" alt="test_job_1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/aa874dcc-fe9e-4a47-b806-d6ac536deab7">
+<img width="644" alt="test_job_2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/8e5a8e32-5638-4987-88c2-42d67ea041fa">
+
+
 
 
 

@@ -75,5 +75,11 @@ The pipeline code must be versioned by commiting to the source code repository.
 
 <img width="903" alt="Add_credentials_13" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/0545bf7b-7a66-44ae-977a-bd638ff4a83c">
 
+## Multibranch pipeline
+
+- Multibranch pipeline enables us to implement different jenkinsfiles for different branches of the same project.
+- Jenkins automatically discovers, manages and creates pipelines for the branches that have jenkinsfile.
+- It automatically creates individual Pipelines for each branch, allowing parallel testing and deployment
+
 
 

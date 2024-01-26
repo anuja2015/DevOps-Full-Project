@@ -81,5 +81,17 @@ The pipeline code must be versioned by commiting to the source code repository.
 - Jenkins automatically discovers, manages and creates pipelines for the branches that have jenkinsfile.
 - It automatically creates individual Pipelines for each branch, allowing parallel testing and deployment
 
+To demonstrate multibranch pipeline, I created 2 branches in the project code repository, dev and test. dev branch has jenkinsfile and test branch doesnt have.
+
+master and dev pipelines are created, test pipeline not created since there was no jenkinsfile found.
+
+<img width="662" alt="multibranch" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/aa37f3e8-eb04-4451-b33f-b0e3f9b7cfa4">
+
+<img width="646" alt="multibranch-2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/85a9be42-12d9-4ebd-99c1-a387ee98de64">
+
+
+
+
+
 
 

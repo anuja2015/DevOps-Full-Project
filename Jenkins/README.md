@@ -46,6 +46,34 @@ We can test the connection by creating a freestyle job.
 <img width="644" alt="test_job_2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/8e5a8e32-5638-4987-88c2-42d67ea041fa">
 
 
+# Creating pipeline code.
+
+The syntax for the pipeline as code:
+
+        pipeline{
+            agent {
+                node{
+                    label 'xxx'
+                }
+            }
+            stages{
+                stage("name_of_the_stage"){
+                    steps{
+
+                    }
+                }
+            }
+        }
+
+The pipeline code must be versioned by commiting to the source code repository.
+
+## Jenkinsfile from SCM and adding github credentials.
+
+<img width="639" alt="Add_credentials_11" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/f9debf74-323f-4e16-833b-d4583cd1d79b">
+
+<img width="623" alt="Add_credentials_12" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/83701d46-584f-4f02-81c4-7529db585552">
+
+<img width="903" alt="Add_credentials_13" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/0545bf7b-7a66-44ae-977a-bd638ff4a83c">
 
 
 

@@ -4,4 +4,4 @@ Terraform/terraform.tfstate
 Terraform/terraform.tfstate.backup
 credentials.txt
 Jenkins/jenkins_credentials
-SonarQube-Integration-Jenkins/sonar-cred
+SonarQube-Integration-Jenkins/sonar-cred.txt

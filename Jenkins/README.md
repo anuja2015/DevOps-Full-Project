@@ -89,6 +89,32 @@ master and dev pipelines are created, test pipeline not created since there was 
 
 <img width="646" alt="multibranch-2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/85a9be42-12d9-4ebd-99c1-a387ee98de64">
 
+## Enable Github webhook
+
+1. Install multibranch scan webhook trigger plugin.
+
+Dashboard -> Manage Jenkins -> Plugins -> Available Plugins -> Multibranch Scan Webhook trigger.
+
+2. Configure the multibranch pipeline job.
+
+Multibranch pipeline job -> Configure -> Scan Multibranch pipeline triggers -> Scan by webhook -> trigger token
+
+JENKINS_URL/multibranch-webhook-trigger/invoke?token=[Trigger token]  ----> This url has to  be customised to create Payload URL.
+
+<img width="904" alt="multibranch-scan-trigger" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/d955bd2d-9f63-4c2d-8fb8-7d65aff517cc">
+
+
+3. Add webhook to the GitHub repository.
+
+GitHub -> devops-project-code -> Settings -> Webhooks-> Add webhook
+Payload URL -> http://172.177.85.218:8080/multibranch-webhook-trigger/invoke?token=my-token
+
+<img width="778" alt="webhook" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/c09add5c-7776-4080-93ff-336a0d43d986">
+
+<img width="896" alt="webhook1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/e1196f35-3c3d-41ec-92f9-3876d7b43b73">
+
+
+
 
 
 

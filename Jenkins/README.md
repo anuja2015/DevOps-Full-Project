@@ -46,6 +46,78 @@ We can test the connection by creating a freestyle job.
 <img width="644" alt="test_job_2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/8e5a8e32-5638-4987-88c2-42d67ea041fa">
 
 
+# Creating pipeline code.
+
+The syntax for the pipeline as code:
+
+        pipeline{
+            agent {
+                node{
+                    label 'xxx'
+                }
+            }
+            stages{
+                stage("name_of_the_stage"){
+                    steps{
+
+                    }
+                }
+            }
+        }
+
+The pipeline code must be versioned by commiting to the source code repository.
+
+## Jenkinsfile from SCM and adding github credentials.
+
+<img width="639" alt="Add_credentials_11" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/f9debf74-323f-4e16-833b-d4583cd1d79b">
+
+<img width="623" alt="Add_credentials_12" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/83701d46-584f-4f02-81c4-7529db585552">
+
+<img width="903" alt="Add_credentials_13" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/0545bf7b-7a66-44ae-977a-bd638ff4a83c">
+
+## Multibranch pipeline
+
+- Multibranch pipeline enables us to implement different jenkinsfiles for different branches of the same project.
+- Jenkins automatically discovers, manages and creates pipelines for the branches that have jenkinsfile.
+- It automatically creates individual Pipelines for each branch, allowing parallel testing and deployment
+
+To demonstrate multibranch pipeline, I created 2 branches in the project code repository, dev and test. dev branch has jenkinsfile and test branch doesnt have.
+
+master and dev pipelines are created, test pipeline not created since there was no jenkinsfile found.
+
+<img width="662" alt="multibranch" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/aa37f3e8-eb04-4451-b33f-b0e3f9b7cfa4">
+
+<img width="646" alt="multibranch-2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/85a9be42-12d9-4ebd-99c1-a387ee98de64">
+
+## Enable Github webhook
+
+1. Install multibranch scan webhook trigger plugin.
+
+Dashboard -> Manage Jenkins -> Plugins -> Available Plugins -> Multibranch Scan Webhook trigger.
+
+2. Configure the multibranch pipeline job.
+
+Multibranch pipeline job -> Configure -> Scan Multibranch pipeline triggers -> Scan by webhook -> trigger token
+
+JENKINS_URL/multibranch-webhook-trigger/invoke?token=[Trigger token]  ----> This url has to  be customised to create Payload URL.
+
+<img width="904" alt="multibranch-scan-trigger" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/d955bd2d-9f63-4c2d-8fb8-7d65aff517cc">
+
+
+3. Add webhook to the GitHub repository.
+
+GitHub -> devops-project-code -> Settings -> Webhooks-> Add webhook
+Payload URL -> http://172.177.85.218:8080/multibranch-webhook-trigger/invoke?token=my-token
+
+<img width="778" alt="webhook" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/c09add5c-7776-4080-93ff-336a0d43d986">
+
+<img width="896" alt="webhook1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/e1196f35-3c3d-41ec-92f9-3876d7b43b73">
+
+
+
+
+
+
 
 
 

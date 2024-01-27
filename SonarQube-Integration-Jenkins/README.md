@@ -22,6 +22,7 @@ Manage Jenkins -> Plugins -> Available Plugins -> SonarQube scanner plugin.
 5. Configure SonarQube server.
 
 Manage Jenkins -> System -> SonarQube installation - > Add SonarQube.
+
 <img width="869" alt="add-sonarqube-server" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/35bfc563-9e56-4803-9486-9ea919e22edc">
 
 
@@ -29,5 +30,40 @@ Manage Jenkins -> System -> SonarQube installation - > Add SonarQube.
 
 Manage Jenkins -> Tools -> Sonar scanner installations.
 
-<img width="903" alt="add-sonar-scanner" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/86a9d65d-1c21-4032-b711-1248f6b373bc">
+<img width="903" alt="add-sonar-scanner" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/31bf89cd-d691-46e2-a671-ceeb4f92ecf2">
+
+
+7. Create SonarQube properties file.
+
+   1. Create organization.
+   My account -> Organizations -> Create -> create an organization manually.
+
+<img width="736" alt="create-org" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/31928b52-823f-43c9-98be-12cf7727c500">
+
+<img width="857" alt="create-org1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/635ea303-d864-43a9-9d8b-0b510f543674">
+
+   2. Create new projct to analyse
+   My account -> Organizations -> mydevops2023 -> Analyze a new project.
+
+<img width="574" alt="create-proj" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/22ac70b3-d8ac-4857-82c6-66d161f009e1">
+
+<img width="554" alt="create-proj1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/31d04b13-66e8-4531-9133-a6cdcb57d375">
+
+<img width="907" alt="create-proj2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/6a1402ec-9e27-4d7b-b11f-ac1631d84d17">
+
+Now create sonar-project.properties in the root folder of the source code. 
+
+    sonar.verbose=true
+    sonar.organization=mydevops2023
+    sonar.projectKey=mydevops23_tweettrend
+    sonar.projectName=tweettrend
+    sonar.language=java
+    sonar.sourceEncoding=UTF-8
+    sonar.sources=.
+    sonar.java.binaries=target/classes
+    sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
+    
+8. Add SonarQube stage in the Jenkinsfile.
+
+
 

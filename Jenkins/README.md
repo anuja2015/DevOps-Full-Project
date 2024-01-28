@@ -27,14 +27,18 @@ __Steps:__
 
 
 Dashboard->Manage Jenkins->Credentials->System->Global credentials (unrestricted)
+user -> jenkins
 
 <img width="644" alt="Add_credentials_1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/46a49b9f-cae7-452c-9c9e-58dd39489279">
 
 <img width="895" alt="Add_credentials_2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/b93ad599-e372-4045-b33a-923db3fa6ad4">
 
-Private key of the jenkins-master machine is added.
+Private key of the jenkins user on jenkins-master machine is added.
 
 ### 2. Add node.
+
+root directory -> /var/lib/jenkins
+
 <img width="566" alt="Add_node_1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/5adf47dc-304e-4d42-9011-738e9d697bc2">
 <img width="799" alt="Add_node_2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/2a76e604-5e35-41bf-b2d9-a61661c5c76e">
 <img width="815" alt="Add_node_3" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/84ed6050-2a21-4330-88e2-f3e2f85d0beb">

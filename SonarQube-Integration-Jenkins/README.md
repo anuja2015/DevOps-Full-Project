@@ -90,6 +90,30 @@ Also add environment variable
   1. Maven sure-fire plugin works with Java 17 and above.
   2. use the latest version for jacoco
 
+10. Add Quality gates on sonar cloud for the project.
+    <img width="905" alt="create-qg" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/1d9571f4-97fd-459e-84d3-a09b8d31bdbb">
+
+11. Add conditions for the quality gate.
+
+<img width="394" alt="qgcondition1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/1c0c8536-3752-4b4e-b28f-33e3e1c7ed9a">
+
+<img width="908" alt="qgapplytoproject" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/e424679f-7c31-467b-ab6b-c2f66ee44ddb">
+
+12. Add QualityGate stage to the jenkins file.
+
+    stage("Quality Gate"){
+          steps{  
+            script{
+              timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+              def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+              if (qg.status != 'OK') {
+                 error "Pipeline aborted due to quality gate failure: ${qg.status}"
+              }
+            }
+            }
+        }
+       }
+
 
              
 

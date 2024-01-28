@@ -63,7 +63,15 @@ Now create sonar-project.properties in the root folder of the source code.
     sonar.java.binaries=target/classes
     sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
     
-8. Add SonarQube stage in the Jenkinsfile.
+8. Add unit test to Jenkins file.
+   tage("Test"){
+          steps{
+           echo "---------- unit test started ----------" 
+             sh 'mvn surefire-report:report'
+           echo "---------- unit test completed ----------"
+          }
+        }
+9. Add SonarQube stage in the Jenkinsfile.
 
         stage('SonarQube analysis') {
           steps{
@@ -80,4 +88,7 @@ Also add environment variable
 ### __Note__ : 
   1. Maven sure-fire plugin works with Java 17 and above.
   2. use the latest version for jacoco
+
+
+             
 

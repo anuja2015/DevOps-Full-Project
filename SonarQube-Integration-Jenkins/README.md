@@ -65,5 +65,16 @@ Now create sonar-project.properties in the root folder of the source code.
     
 8. Add SonarQube stage in the Jenkinsfile.
 
+    stage('SonarQube analysis') {
+          steps{
+                withSonarQubeEnv('my-sonarqube-server') { // If you have configured more than one global server connection, you can specify its name
+                sh "${scannerHome}/bin/sonar-scanner"
+    }
+          }
+        }
+
+Also add environment variable
+     scannerHome = tool 'my-sonar-scanner'
+
 
 

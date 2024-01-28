@@ -45,5 +45,27 @@ Maven Repository: mydevops2023-libs-snapshot
 
 https:///artifactory/api/maven/mydevops2023-libs-snapshot
 
+#### 3. Generate Access token for the username.
+
+Platform Configuration -> User Management -> Access tokens -> Generate token.
+
+<img width="944" alt="accesstoken" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/4c943ab6-12cb-4f2f-b92a-2f3b567a2d0d">
+
+<img width="889" alt="accesstoken1" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/ac40fb8d-43be-45e6-86b8-5f791c44d165">
+
+<img width="652" alt="accesstoken2" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/0cec1339-1bc2-4183-b969-f04caff5d574">
+
+Copy the generated access token as it will not be stored in JFrog.
+
+#### 4. Add accesstoken to Jenkins credentials
+
+Manage Jenkins -> Credentials -> System -> Global credentials -> Add credentials -> Username and password(Kind)
+
+<img width="898" alt="accesstokenJenkins" src="https://github.com/anuja2015/DevOps-Full-Project/assets/16287330/47ca33bc-0d10-4218-92c2-eee8ff49acdd">
+
+#### 5. Install artifactory plugin
+
+Manage Jenkins -> Plugins -> Available plugins -> Artifactory 
+
 
 

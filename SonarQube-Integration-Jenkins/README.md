@@ -64,7 +64,8 @@ Now create sonar-project.properties in the root folder of the source code.
     sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
     
 8. Add unit test to Jenkins file.
-   tage("Test"){
+   
+        stage("Test"){
           steps{
            echo "---------- unit test started ----------" 
              sh 'mvn surefire-report:report'

@@ -101,7 +101,9 @@ Also add environment variable
 
 12. Add QualityGate stage to the jenkins file.
 
-    stage("Quality Gate"){
+    This snippet is added to jenkinsfile
+
+        stage("Quality Gate"){
           steps{  
             script{
               timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout

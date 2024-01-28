@@ -77,5 +77,7 @@ Also add environment variable
      
      scannerHome = tool 'my-sonar-scanner'
 
-
+### __Note__ : 
+  1. Maven sure-fire plugin works with Java 17 and above.
+  2. use the latest version for jacoco
 

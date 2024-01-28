@@ -68,4 +68,42 @@ Manage Jenkins -> Credentials -> System -> Global credentials -> Add credentials
 Manage Jenkins -> Plugins -> Available plugins -> Artifactory 
 
 
+#### 6. Update Jenkinsfile with jar publish stage.
+
+#### __Information needed to add publish jar stage to jenkinsfile__
+
+1. JFrog Artifactory URL : https://devopsdecember2023.jfrog.io
+
+2. Artifact location: /var/lib/jenkins/workspace/rend-multibranch-pipeline_master/target
+3. Credentials : artifactory_cred
+
+        stage("Jar Publish") {
+           steps {
+             script {
+                    echo '<--------------- Jar Publish Started --------------->'
+                     def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"artifactory_cred"
+                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
+                     def uploadSpec = """{
+                          "files": [
+                            {
+                              "pattern": "target/*.jar",
+                              "target": "libs-release-local/{1}",
+                              "flat": "false",
+                              "props" : "${properties}",
+                              "exclusions": [ "*.sha1", "*.md5"]
+                            }
+                         ]
+                     }"""
+                     def buildInfo = server.upload(uploadSpec)
+                     buildInfo.env.collect()
+                     server.publishBuildInfo(buildInfo)
+                     echo '<--------------- Jar Publish Ended --------------->'  
+            
+            }
+        }  
+         }   
+
+
+
+
 

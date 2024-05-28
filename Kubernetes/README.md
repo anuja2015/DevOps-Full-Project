@@ -44,13 +44,17 @@ kubectl delete pod/mydevops-rtp-64d9945ff9-jklf8 -n mydevops2023
 
 root@jenkins-node:/opt/kubernetes# kubectl get all -n mydevops2023
 NAME                                READY   STATUS    RESTARTS   AGE
+
 pod/mydevops-rtp-64d9945ff9-tgxzf   1/1     Running   0          54s
+
 pod/mydevops-rtp-64d9945ff9-wm8ql   1/1     Running   0          32s
 
 NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+
 deployment.apps/mydevops-rtp   2/2     2            2           35m
 
 NAME                                      DESIRED   CURRENT   READY   AGE
+
 replicaset.apps/mydevops-rtp-64d9945ff9   2         2         2       35m
 root@jenkins-node:/opt/kubernetes#
 
